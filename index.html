@@ -209,42 +209,38 @@ nav ul li a {
 				},
 				success : function(data){
 
+					if(typeof data != "undefined" && data != null) {
+						$.each(data.data,function(k,v){			        		
 
+							// var list = "<li><a class='fancybox' rel='gallery1' title='"+v['from']['name']+"' data-title='"+v['picture']+"' data-largesrc='"+v['picture']+"' data-description='"+v['picture']+"' href='"+v['images'][0]['source']+"'><img src='"+v['source']+"' /></a></li>";
+							if(p == 0 || p == 6 ) {
+								dividen = 2;
+							} else if(p == 9) {
+								dividen = 5;
+							} else if(p == 8 || p == 5 || p == 4) {
+								dividen = 3;
+							} else {
+								dividen = 4;
+							
+							}
+								var list = '<article class="item thumb" data-width="'+v['images'][0]['width']/dividen+'"><h2>'+v['from']['name']+'</h2><a href="'
+								+v['images'][0]['source']+'" class="image"><img src="'+v['images'][0]['source']+'" alt=""></a></article>';
+								$("#reel").append(list);
+
+						});
+						var paging = data.paging;
+						next = paging["next"];
+						console.log(next);
+
+						// $(".fancybox").fancybox({
+						// 	padding : 0
+						// });
+						parallelism.init();
+
+
+						startFetch = true;
+					} 
 					
-					$.each(data.data,function(k,v){			        		
-
-						// var list = "<li><a class='fancybox' rel='gallery1' title='"+v['from']['name']+"' data-title='"+v['picture']+"' data-largesrc='"+v['picture']+"' data-description='"+v['picture']+"' href='"+v['images'][0]['source']+"'><img src='"+v['source']+"' /></a></li>";
-						if(p == 0 || p == 6 ) {
-							dividen = 2;
-						} else if(p == 9) {
-							dividen = 5;
-						} else if(p == 8 || p == 5 || p == 4) {
-							dividen = 3;
-						} else {
-							dividen = 4;
-						
-						}
-							var list = '<article class="item thumb" data-width="'+v['images'][0]['width']/dividen+'"><h2>'+v['from']['name']+'</h2><a href="'
-							+v['images'][0]['source']+'" class="image"><img src="'+v['images'][0]['source']+'" alt=""></a></article>';
-							$("#reel").append(list);
-						
-						
-						//console.log(v['id']);
-
-
-					});
-					var paging = data.paging;
-					next = paging["next"];
-					console.log(next);
-
-					// $(".fancybox").fancybox({
-					// 	padding : 0
-					// });
-					parallelism.init();
-
-
-					startFetch = true;
-
 				}
 
 			});
@@ -271,14 +267,11 @@ nav ul li a {
 
 
 			var a = $.parseParams(window.location);
-			if(a != null) {
+			if (!jQuery.isEmptyObject(a)) 
 				p = a["p"];
-			}
-			var url = "https://graph.facebook.com/"+pageUri[p]+"/photos?callback=yes&fields=name,images,source,from&limit=50&access_token=" +access_token ;
-
-
-			
-fetch(url);
+			var url = "https://graph.facebook.com/"+pageUri[p]+"/photos?callback=yes&fields=name,images,source,from&limit=50&access_token=" +access_token;
+			console.log(url);
+			fetch(url);
 			
 			window.onscroll = function(ev) {
 				console.log(startFetch);
