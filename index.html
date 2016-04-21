@@ -25,6 +25,25 @@
 #header h1 {
 	font-family: "LICENSE", san-serif;
 }
+div#menu {
+	float: left;
+	background: rgba(37,37,37,0.9);
+	    position: fixed;
+    margin-top: -44px;
+}
+nav {
+
+}
+nav ul li {
+	float: left;
+    margin: 10px;
+   
+}
+
+nav ul li a {
+	 font-family: "LICENSE", san-serif;
+        font-size: 24px;
+}
 		</style>
 	</head>
 	<body>
@@ -32,6 +51,22 @@
 		<div id="wrapper">
 
 			<div id="main">
+				<div id="menu">
+				<nav>
+					<ul>
+						<li><a href="#" data="0">Gallery</a> </li>
+						<li><a href="#" data="1">Street Star</a> </li>
+						<li><a href="#" data="2">T-Shirt</a> </li>
+						<li><a href="#" data="3">Winter</a> </li>
+						<li><a href="#" data="4">Overlay Street</a> </li>
+						<li><a href="#" data="5">Softtect</a> </li>
+						<li><a href="#" data="6">Softtect Girl</a>  </li>
+						<li><a href="#" data="7">Polo</a>  </li>
+						<li><a href="#" data="8">Street Shirt</a>  </li>
+						<li><a href="#" data="9">Jigsaw Sandal</a>  </li>
+					</ul>
+				</nav>
+				</div>
 				<div id="reel">
 
 					<!-- Header Item -->
@@ -45,7 +80,7 @@
 
 					<!-- Thumb Items -->
 
-						<article class="item thumb" data-width="382">
+						<!-- <article class="item thumb" data-width="382">
 							<h2>You really got me</h2>
 							<a href="images/fulls/1.jpg" class="image"><img src="images/fulls/1.jpg" alt=""></a>
 						</article>
@@ -83,17 +118,17 @@
 						<article class="item thumb" data-width="348">
 							<h2>The Spectators</h2>
 							<a href="images/fulls/8.jpg" class="image"><img src="images/fulls/8.jpg" alt=""></a>
-						</article>
+						</article> -->
 
 					<!-- Filler Thumb Items (just for demonstration purposes) -->
-						<article class="item thumb" data-width="476"><h2>Kingdom of the Wind</h2><a href="images/fulls/5.jpg" class="image"><img src="images/fulls/5.jpg" alt=""></a></article>
+<!-- 						<article class="item thumb" data-width="476"><h2>Kingdom of the Wind</h2><a href="images/fulls/5.jpg" class="image"><img src="images/fulls/5.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="232"><h2>The Pursuit</h2><a href="images/fulls/6.jpg" class="image"><img src="images/fulls/6.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="352"><h2>Boundless</h2><a href="images/fulls/7.jpg" class="image"><img src="images/fulls/7.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="348"><h2>The Spectators</h2><a href="images/fulls/8.jpg" class="image"><img src="images/fulls/8.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="282"><h2>You really got me</h2><a href="images/fulls/1.jpg" class="image"><img src="images/fulls/1.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="384"><h2>Ad Infinitum</h2><a href="images/fulls/2.jpg" class="image"><img src="images/fulls/2.jpg" alt=""></a></article>
 						<article class="item thumb" data-width="274"><h2>Different.</h2><a href="images/fulls/3.jpg" class="image"><img src="images/fulls/3.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="282"><h2>Elysium</h2><a href="images/fulls/4.jpg" class="image"><img src="images/fulls/4.jpg" alt=""></a></article>
+						<article class="item thumb" data-width="282"><h2>Elysium</h2><a href="images/fulls/4.jpg" class="image"><img src="images/fulls/4.jpg" alt=""></a></article> -->
 
 				</div>
 			</div>
@@ -128,6 +163,138 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script type="text/javascript">
+
+
+// 	for(i=11;i<=38;i++) {
+// 		var list = "<li><a class='fancybox' rel='gallery1' title='aaa' data-title='bbb' data-largesrc='img/"+i+".jpg' data-description='ccc' href='img/"+i+".jpg'><img src='img/"+i+".jpg' /></a></li>";
+// $("#grid").append(list);
+
+// 	}
+
+// $(".fancybox").fancybox({
+// 						padding : 0
+// 					});
+// 					new AnimOnScroll( document.getElementById( 'grid' ), {
+// 						minDuration : 0.4,
+// 						maxDuration : 0.7,
+// 						viewportFactor : 0.2
+// 					} );
+
+		var next = "";
+		var pageUri = ["472342139626228","504374909756284","451838791676563","451847455009030","489431441250631","475398859320556","499660456894396","431333623727080","450988175094958","505036999690075"];
+		var access_token = "812207955571269|UHobfeGkWu_hqcuiDijkLTMpxtQ";
+
+
+		
+
+		function fetchProfile(){
+			var profile = "https://graph.facebook.com/"+pageUri[p]+"?callback=yes&access_token=" + access_token;
+			$.ajax({
+				type: "POST",
+				dataType: 'jsonp',
+				url: profile,
+				success : function(data){
+					console.log(data);
+					$("header h1").html(data.name + " <span>"+data.about+"</span>");
+				}
+			});
+		}
+		function fetch(url) {
+			$.ajax({
+				type: "POST",
+				dataType: 'jsonp',
+				url: url,
+				data:  {
+				},
+				success : function(data){
+
+
+					
+					$.each(data.data,function(k,v){			        		
+
+						// var list = "<li><a class='fancybox' rel='gallery1' title='"+v['from']['name']+"' data-title='"+v['picture']+"' data-largesrc='"+v['picture']+"' data-description='"+v['picture']+"' href='"+v['images'][0]['source']+"'><img src='"+v['source']+"' /></a></li>";
+						if(p == 0 || p == 6 ) {
+							dividen = 2;
+						} else if(p == 9) {
+							dividen = 5;
+						} else if(p == 8 || p == 5 || p == 4) {
+							dividen = 3;
+						} else {
+							dividen = 4;
+						
+						}
+							var list = '<article class="item thumb" data-width="'+v['images'][0]['width']/dividen+'"><h2>'+v['from']['name']+'</h2><a href="'
+							+v['images'][0]['source']+'" class="image"><img src="'+v['images'][0]['source']+'" alt=""></a></article>';
+							$("#reel").append(list);
+						
+						
+						//console.log(v['id']);
+
+
+					});
+					var paging = data.paging;
+					next = paging["next"];
+					console.log(next);
+
+					// $(".fancybox").fancybox({
+					// 	padding : 0
+					// });
+					parallelism.init();
+
+
+					startFetch = true;
+
+				}
+
+			});
+		}
+
+		function showOverlay(){
+			var overlay = $('<div id="overlay"><div>loading</div></div>');
+			overlay.appendTo(document.body);
+		}
+		function hideOverlay(){
+			$("#overlay").hide();
+		}
+		var startFetch = true;
+		var p = 0;
+		$(function(){
+
+			$("#menu li a").on("click",function(k,v){
+				console.log($(this).attr("data"));
+				var i = $(this).attr("data");
+				window.location.href = "?p="+i;
+				// var url = "https://graph.facebook.com/"+pageUri[i]+"/photos?callback=yes&fields=name,images,source,from&limit=50&access_token=" +access_token ;	
+				// fetch(url);
+			});
+
+
+			var a = $.parseParams(window.location);
+			if(a != null) {
+				p = a["p"];
+			}
+			var url = "https://graph.facebook.com/"+pageUri[p]+"/photos?callback=yes&fields=name,images,source,from&limit=50&access_token=" +access_token ;
+
+
+			
+fetch(url);
+			
+			window.onscroll = function(ev) {
+				console.log(startFetch);
+				if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && startFetch) {
+					startFetch = false;
+					
+					next = "https://graph.facebook.com/"+pageUri[p]+"/photos/uploaded?callback=yes&fields=name,images,source,from&limit=50&access_token=" + access_token;
+					
+					//fetch(next);
+				}
+			};
+		});
+
+
+	
+			</script>
 
 	</body>
 </html>
